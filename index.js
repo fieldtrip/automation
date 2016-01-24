@@ -17,8 +17,10 @@ var bitly = new Bitly(process.env.BITLY_API_KEY);
 
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
-    res.statusCode = 404
-    res.end('no such location')
+    // res.statusCode = 404
+    // res.end('no such location')
+    res.writeHead(302, {'Location': 'http://www.fieldtriptoolbox.org/'});
+    res.end();
   })
 }).listen(3000)
 
@@ -38,14 +40,10 @@ handler.on('push', function (event) {
   child_process.execFile(__dirname + '/github.sh'); // [, args][, options][, callback])
   console.log('Received a push event for %s to %s', event.payload.repository.name, event.payload.ref);
   event.payload.commits.forEach(function (commit, index) {
-    console.log(index);
     bitly.shorten(commit.url)
       .then(function(response) {
         var short_url = response.data.url;
         var author = commit.author.name;
-        // replace these full names with given name
-        author = author.replace("Robert Oostenveld","Robert");
-        author = author.replace("Jan-Mathijs Schoffelen","Jan-Mathijs");
         // clean up a bit, remove git-svn-id and remove lines beyond the 1st one
         var message = author + "(github): " + commit.message.replace(/git-svn-id.*/, "");
         message = message.split("\n")[0];
