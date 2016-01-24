@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+
+// this requires that you source the environment variables from apikey.sh
  
 var Bitly = require('bitly');
 var bitly = new Bitly(process.env.BITLY_API_KEY);

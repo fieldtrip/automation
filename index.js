@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+// this requires that you source the environment variables from apikey.sh
+
 var http = require('http')
 var child_process = require('child_process');
 

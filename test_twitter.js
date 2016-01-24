@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// this requires that you source the environment variables from apikey.sh
+
 var Twitter = require('twitter');
 var twitter = new Twitter({
   consumer_key:         process.env.TWITTER_CONSUMER_KEY,
