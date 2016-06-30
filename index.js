@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
     res.writeHead(302, {'Location': 'http://www.fieldtriptoolbox.org/'});
     res.end();
   })
-}).listen(3000)
+}).listen(3001)
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
