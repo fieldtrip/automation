@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var port = 3000;
+var port = 3001;
 
 // Load the http module to create an http server.
 var http = require('http');
