@@ -22,3 +22,6 @@ git push origin master
 # also push to bitbucket
 git push bitbucket master
 
+# also push to gitlab
+git push gitlab master
+
