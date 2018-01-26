@@ -4,6 +4,8 @@ FILEPATH=`dirname "$0"`
 CMDFILE=`basename "$0" .sh`
 LOGFILE="$FILEPATH"/"$CMDFILE".log
 FIELDTRIPDIR=$HOME/fieldtrip/fieldtrip
+FILEIODIR=$HOME/fieldtrip/fileio
+QSUBDIR=$HOME/fieldtrip/qsub
 
 date > $LOGFILE
 
@@ -24,4 +26,16 @@ git push bitbucket master
 
 # also push to gitlab
 git push gitlab master
+
+# synchronize the fileio repository
+cd $FILEIODIR
+rsync -arp $FIELDTRIPDIR/fileio/* .
+git add .
+git commit -am "synchronized with $REV from main FieldTrip repository"
+
+# synchronize the qsub repository
+cd $QSUBDIR
+rsync -arp $FIELDTRIPDIR/qsub/* .
+git add .
+git commit -am "synchronized with $REV from main FieldTrip repository"
 
