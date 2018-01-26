@@ -29,13 +29,15 @@ git push gitlab master
 
 # synchronize the fileio repository
 cd $FILEIODIR
-rsync -arp $FIELDTRIPDIR/fileio/* .
+rsync -arp --delete--exclude '.git' $FIELDTRIPDIR/fileio/* .
 git add .
-git commit -am "synchronized with $REV from main FieldTrip repository"
+git commit -am "synchronized with main FieldTrip repository"
+git push
 
 # synchronize the qsub repository
 cd $QSUBDIR
-rsync -arp $FIELDTRIPDIR/qsub/* .
+rsync -arp --delete --exclude '.git' $FIELDTRIPDIR/qsub/* .
 git add .
-git commit -am "synchronized with $REV from main FieldTrip repository"
+git commit -am "synchronized with main FieldTrip repository"
+git push
 
