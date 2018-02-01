@@ -29,7 +29,7 @@ git push gitlab master
 
 # synchronize the fileio repository
 cd $FILEIODIR
-rsync -arp --delete--exclude '.git' $FIELDTRIPDIR/fileio/* .
+rsync -arp --delete --exclude '.git' $FIELDTRIPDIR/fileio/* .
 git add .
 git commit -am "synchronized with main FieldTrip repository"
 git push
