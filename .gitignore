@@ -1,4 +1,5 @@
-test_*.js
-secret.sh
 *.log
+.foreverignore
 node_modules/*
+secret.sh
+test_*.js
