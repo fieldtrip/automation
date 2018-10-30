@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
     res.writeHead(302, {'Location': 'http://www.fieldtriptoolbox.org/'});
     res.end();
   })
-}).listen(3001)
+}).listen(process.env.PORT)
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
@@ -41,8 +41,8 @@ handler.on('issues', function (event) {
 })
 
 handler.on('push', function (event) {
-  child_process.execFile(__dirname + '/github.sh'); // [, args][, options][, callback])
   console.log('Received a push event for %s to %s', event.payload.repository.name, event.payload.ref);
+  child_process.execFile(__dirname + '/github.sh'); // [, args][, options][, callback])
   event.payload.commits.forEach(function (commit, index) {
     bitly.shorten(commit.url)
       .then(function(response) {
