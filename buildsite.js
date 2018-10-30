@@ -6,7 +6,7 @@ var http = require('http')
 var child_process = require('child_process');
 
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/github', secret: process.env.GITHUB_SECRET_FIELDRTIP })
+var handler = createHandler({ path: '/github', secret: process.env.GITHUB_SECRET_WEBSITE })
 
 var Twitter = require('twitter');
 var twitter = new Twitter({
@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
     res.writeHead(302, {'Location': 'http://www.fieldtriptoolbox.org/'});
     res.end();
   })
-}).listen(process.env.PORT_FIELDTRIP)
+}).listen(process.env.PORT_WEBSITE)
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
@@ -42,14 +42,14 @@ handler.on('issues', function (event) {
 
 handler.on('push', function (event) {
   console.log('Received a push event for %s to %s', event.payload.repository.name, event.payload.ref);
-  child_process.execFile(__dirname + '/github.sh'); // [, args][, options][, callback])
+  child_process.execFile(__dirname + '/buildsite.sh'); // [, args][, options][, callback])
   event.payload.commits.forEach(function (commit, index) {
     bitly.shorten(commit.url)
       .then(function(response) {
         var short_url = response.data.url;
         var author = commit.author.name;
         // clean up a bit, remove git-svn-id and remove lines beyond the 1st one
-        var message = author + "(github): " + commit.message.replace(/git-svn-id.*/, "");
+        var message = author + "(website): " + commit.message.replace(/git-svn-id.*/, "");
         message = message.split("\n")[0];
         message = message.substring(0, 139 - short_url.length) + " " + short_url;
         console.log('------------------------------------------')
