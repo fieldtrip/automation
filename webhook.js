@@ -6,7 +6,7 @@ var http = require('http')
 var child_process = require('child_process');
 
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/github', secret: process.env.GITHUB_SECRET })
+var handler = createHandler({ path: '/github', secret: process.env.FIELDTRIP_GITHUB_SECRET })
 
 var Twitter = require('twitter');
 var twitter = new Twitter({
@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
     res.writeHead(302, {'Location': 'http://www.fieldtriptoolbox.org/'});
     res.end();
   })
-}).listen(process.env.PORT)
+}).listen(process.env.FIELDTRIP_PORT)
 
 handler.on('error', function (err) {
   console.error('Error:', err.message)
