@@ -49,7 +49,7 @@ handler.on('push', function (event) {
         var short_url = response.data.url;
         var author = commit.author.name;
         // clean up a bit, remove git-svn-id and remove lines beyond the 1st one
-        var message = author + "(website): " + commit.message.replace(/git-svn-id.*/, "");
+        var message = author + ": " + commit.message.replace(/git-svn-id.*/, "");
         message = message.split("\n")[0];
         message = message.substring(0, 139 - short_url.length) + " " + short_url;
         console.log('------------------------------------------')
@@ -66,6 +66,6 @@ handler.on('push', function (event) {
       }, function(error) {
         throw error; // error in calling bitly
       });
-
   });
 });
+
