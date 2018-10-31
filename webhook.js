@@ -6,7 +6,7 @@ var http = require('http')
 var child_process = require('child_process');
 
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/github', secret: process.env.GITHUB_SECRET_FIELDRTIP })
+var handler = createHandler({ path: '/github', secret: process.env.GITHUB_SECRET_FIELDTRIP })
 
 var Twitter = require('twitter');
 var twitter = new Twitter({
