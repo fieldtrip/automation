@@ -4,8 +4,8 @@
 #PBS -l mem=100Mb
 #
 # this script is started either from a cronjob or a webhook and it updates
-# http://www.fieldtriptoolbox.org/reference/*.md
-# http://www.fieldtriptoolbox.org/reference/configuration_index.md
+# http://www.fieldtriptoolbox.org/reference/
+# http://www.fieldtriptoolbox.org/reference/configuration
 
 LOCKFILE=$HOME/documentation.lock
 LOGFILE=$HOME/documentation.log
@@ -63,7 +63,7 @@ ft_defaults
 system('cd $TARGETDIR && git pull');
 system('rm $TARGETDIR/reference/*.md');
 ft_documentationreference('$TARGETDIR/reference');
-ft_documentationindex('$TARGETDIR/reference/configuration_index.md');
+ft_documentationindex('$TARGETDIR/reference/configuration.md');
 system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
 system('cd $TARGETDIR && git push');
 
@@ -71,7 +71,7 @@ system('cd $TARGETDIR && git push');
 % system('mkdir -p $TARGETDIR');
 % system('rm $TARGETDIR/*.md');
 % ft_documentationreference('$TARGETDIR');
-% ft_documentationindex('$TARGETDIR/configuration_index.md');
+% ft_documentationindex('$TARGETDIR/configuration.md');
 % system('scp $TARGETDIR/*.md roboos@www.fieldtriptoolbox.org:/home/mrphys/roboos/website/reference');
 
 end % try
