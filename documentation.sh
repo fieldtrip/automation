@@ -26,7 +26,7 @@ done
 [ -e $LOGFILE  ] || touch $LOGFILE
 [ -e $LOCKFILE ] || touch $LOCKFILE
 
-
+TRUNK=$HOME/fieldtrip/release/fieldtrip
 TARGETDIR=$HOME/fieldtrip/release/website
 MATLABSCRIPT=$HOME/fieldtrip_reference.m
 
@@ -35,44 +35,37 @@ cat > $MATLABSCRIPT << EOF
 try,
 % set up the path
 restoredefaultpath
-addpath('$HOME/fieldtrip/release/github');
-addpath('$HOME/fieldtrip/release/github/connectivity');
-addpath('$HOME/fieldtrip/release/github/contrib/misc');
-addpath('$HOME/fieldtrip/release/github/contrib/nutmegtrip');
-addpath('$HOME/fieldtrip/release/github/contrib/spike');
-addpath('$HOME/fieldtrip/release/github/engine');
-addpath('$HOME/fieldtrip/release/github/external/artinis');
-addpath('$HOME/fieldtrip/release/github/fileio');
-addpath('$HOME/fieldtrip/release/github/forward');
-addpath('$HOME/fieldtrip/release/github/inverse');
-addpath('$HOME/fieldtrip/release/github/peer');
-addpath('$HOME/fieldtrip/release/github/plotting');
-addpath('$HOME/fieldtrip/release/github/preproc');
-addpath('$HOME/fieldtrip/release/github/qsub');
-addpath('$HOME/fieldtrip/release/github/realtime/example');
-addpath('$HOME/fieldtrip/release/github/realtime/online_eeg');
-addpath('$HOME/fieldtrip/release/github/realtime/online_meg');
-addpath('$HOME/fieldtrip/release/github/realtime/online_mri');
-addpath('$HOME/fieldtrip/release/github/specest');
-addpath('$HOME/fieldtrip/release/github/statfun');
-addpath('$HOME/fieldtrip/release/github/trialfun');
-addpath('$HOME/fieldtrip/release/github/utilities');
+addpath('$TRUNK');
+addpath('$TRUNK/connectivity');
+addpath('$TRUNK/contrib/misc');
+addpath('$TRUNK/contrib/nutmegtrip');
+addpath('$TRUNK/contrib/spike');
+addpath('$TRUNK/engine');
+addpath('$TRUNK/external/artinis');
+addpath('$TRUNK/fileio');
+addpath('$TRUNK/forward');
+addpath('$TRUNK/inverse');
+addpath('$TRUNK/peer');
+addpath('$TRUNK/plotting');
+addpath('$TRUNK/preproc');
+addpath('$TRUNK/qsub');
+addpath('$TRUNK/realtime/example');
+addpath('$TRUNK/realtime/online_eeg');
+addpath('$TRUNK/realtime/online_meg');
+addpath('$TRUNK/realtime/online_mri');
+addpath('$TRUNK/specest');
+addpath('$TRUNK/statfun');
+addpath('$TRUNK/trialfun');
+addpath('$TRUNK/utilities');
 ft_defaults
 
 % create the reference documentation
 system('cd $TARGETDIR && git pull');
 system('rm $TARGETDIR/reference/*.md');
 ft_documentationreference('$TARGETDIR/reference');
-ft_documentationindex('$TARGETDIR/reference/configuration.md');
+ft_documentationconfiguration('$TARGETDIR/reference/configuration.md');
 system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
 system('cd $TARGETDIR && git push');
-
-% create the reference documentation
-% system('mkdir -p $TARGETDIR');
-% system('rm $TARGETDIR/*.md');
-% ft_documentationreference('$TARGETDIR');
-% ft_documentationindex('$TARGETDIR/configuration.md');
-% system('scp $TARGETDIR/*.md roboos@www.fieldtriptoolbox.org:/home/mrphys/roboos/website/reference');
 
 end % try
 exit
