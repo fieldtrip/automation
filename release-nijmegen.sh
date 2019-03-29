@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 #PBS -l walltime=00:05:00
 #PBS -l mem=100Mb
