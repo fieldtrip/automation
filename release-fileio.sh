@@ -15,14 +15,14 @@ CURRMD5=$(tar cf - release-$MODULE |md5sum |awk '{print $1}')
 LASTMD5=$(cat $MD5FILE)
 if [ "x$CURRMD5" = "x$LASTMD5" ]
 then
-	# the current release has not been updated compared to the previous
-	exit 0
+  # the current release has not been updated compared to the previous
+  exit 0
 else
-	# the current release is an updated version
-	echo $CURRMD5 > $MD5FILE
-	mv release-$MODULE $MODULE-$TODAY
-	zip -r daily/$MODULE-$TODAY.zip $MODULE-$TODAY
-	mv $MODULE-$TODAY release-$MODULE
+  # the current release is an updated version
+  echo $CURRMD5 > $MD5FILE
+  mv release-$MODULE $MODULE-$TODAY
+  zip -r daily/$MODULE-$TODAY.zip $MODULE-$TODAY
+  mv $MODULE-$TODAY release-$MODULE
 	
-	cp daily/$MODULE-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/modules
+  cp daily/$MODULE-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/modules
 fi
