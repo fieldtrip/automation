@@ -1,0 +1,16 @@
+# EditorConfig file for FieldTrip code style
+# (see https://EditorConfig.org for info)
+
+root = true
+
+[*]
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{sh,js,json}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.md]
+charset = utf-8
