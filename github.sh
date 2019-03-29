@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 FILEPATH=`dirname "$0"`
 CMDFILE=`basename "$0" .sh`
