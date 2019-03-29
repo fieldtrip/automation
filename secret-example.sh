@@ -1,3 +1,6 @@
+export PORT_FIELDTRIP=xxxx
+export PORT_WEBSITE=xxxx
+
 export GITHUB_SECRET='xxxxxxxxxx'
 
 export BITLY_API_KEY='xxxxxxxxxx'
