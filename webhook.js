@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// this requires that you source the environment variables from apikey.sh
+// this requires that you source the environment variables from secret.sh
 
 var http = require('http')
 var child_process = require('child_process');
@@ -68,4 +68,3 @@ handler.on('push', function (event) {
       });
   });
 });
-

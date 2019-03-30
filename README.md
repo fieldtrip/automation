@@ -12,13 +12,23 @@ has some additional details.
 This repository also contains a simple webhook server that is implemented using
 [Node.js](https://nodejs.org/en/). It can be used to execute Bash scripts and it
 also includes some code to send a tweet. To start the webhook server, you should
-execute the following code:
+execute the following
+
+```
+source ./secret.sh
+nvm use v4.2.6
+node webhook.js
+```
+
+To start the server in the background and ensure that it keeps running, also on the occasional error due to unhandled exceptions, you can use [forever](https://www.npmjs.com/package/forever) and start it like this
+
 
 ```
 source ./secret.sh
 nvm use v4.2.6
 forever start webhook.js
 ```
+
 
 ## fieldtrip/fieldtrip
 
