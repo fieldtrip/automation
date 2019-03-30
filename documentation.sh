@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 #PBS -l walltime=00:05:00
 #PBS -l mem=100Mb
@@ -11,7 +11,7 @@ LOCKFILE=$HOME/documentation.lock
 LOGFILE=$HOME/documentation.log
 
 # prevent concurrent builds
-while [ -e $LOCKFILE ] ; do
+while [[ -e $LOCKFILE ]] ; do
   LOCKTIME=$(( $(date +"%s") - $(stat -c "%Y" $LOCKFILE) ))
   if [ "$LOCKTIME" -gt "300" ]; then
     echo removing stale lock
@@ -23,8 +23,8 @@ while [ -e $LOCKFILE ] ; do
 done
 
 # make sure that these exist
-[ -e $LOGFILE  ] || touch $LOGFILE
-[ -e $LOCKFILE ] || touch $LOCKFILE
+[[ -e $LOGFILE  ]] || touch $LOGFILE
+[[ -e $LOCKFILE ]] || touch $LOCKFILE
 
 TRUNK=$HOME/fieldtrip/release/fieldtrip
 TARGETDIR=$HOME/fieldtrip/release/website

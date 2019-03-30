@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 #PBS -l walltime=00:05:00
 #PBS -l mem=100Mb
@@ -16,23 +16,23 @@ rsync -ar --copy-links --delete --exclude .git --exclude test $TRUNK/ release-ft
 
 CURRMD5=$(tar cf - release-ftp | md5sum |awk '{print $1}')
 LASTMD5=$(cat $MD5FILE)
-if [ "x$CURRMD5" = "x$LASTMD5" ]
+if [[ "x$CURRMD5" = "x$LASTMD5" ]]
 then
-	# the current release has not been updated compared to the previous
-	exit 0
+  # the current release has not been updated compared to the previous
+  exit 0
 else
-	# the current release is an updated version
-	echo $CURRMD5 > $MD5FILE
+  # the current release is an updated version
+  echo $CURRMD5 > $MD5FILE
 
   # remove all older versions
   rm daily/fieldtrip-201?????.zip
   rm daily/fieldtrip-lite-201?????.zip
 
-	mv release-ftp fieldtrip-$TODAY
-	zip -r daily/fieldtrip-$TODAY.zip fieldtrip-$TODAY
-	zip -r daily/fieldtrip-lite-$TODAY.zip fieldtrip-$TODAY -x@exclude.lite
-	mv fieldtrip-$TODAY release-ftp
-	
-	cp daily/fieldtrip-$TODAY.zip      /home/common/matlab/fieldtrip/data/ftp/fieldtrip-$TODAY.zip
-	cp daily/fieldtrip-lite-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/fieldtrip-lite-$TODAY.zip
+  mv release-ftp fieldtrip-$TODAY
+  zip -r daily/fieldtrip-$TODAY.zip fieldtrip-$TODAY
+  zip -r daily/fieldtrip-lite-$TODAY.zip fieldtrip-$TODAY -x@exclude.lite
+  mv fieldtrip-$TODAY release-ftp
+  
+  cp daily/fieldtrip-$TODAY.zip      /home/common/matlab/fieldtrip/data/ftp/fieldtrip-$TODAY.zip
+  cp daily/fieldtrip-lite-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/fieldtrip-lite-$TODAY.zip
 fi
