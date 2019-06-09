@@ -5,7 +5,7 @@
 
 TRUNK=$HOME/fieldtrip/release/fieldtrip
 
-cd $TRUNK && git pull upstream master
+cd $TRUNK && git pull upstream release
 
 cd $HOME/fieldtrip/release || exit 1
 rsync -ar --copy-links --delete --exclude .git $TRUNK/ release-nijmegen || exit 1

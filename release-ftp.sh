@@ -8,7 +8,7 @@ BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
 MD5FILE=$BASEDIR/.tarmd5-release-ftp
 
-cd $TRUNK && git pull upstream master
+cd $TRUNK && git pull upstream release
 
 cd $BASEDIR || exit 1
 
