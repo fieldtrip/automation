@@ -6,7 +6,7 @@ BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
 MD5FILE=$BASEDIR/.tarmd5-release-$MODULE
 
-cd $TRUNK && git pull upstream release
+cd $TRUNK && git checkout release && git pull upstream release
 
 cd $HOME/fieldtrip/release || exit 1
 rsync -ar --copy-links --delete --exclude .git --exclude test $TRUNK/$MODULE/ release-$MODULE || exit 1
