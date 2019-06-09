@@ -1,4 +1,4 @@
-# FieldTrip webhook
+# FieldTrip automation
 
 This repository contains various scripts used to manage releases and to link the
 different development tools together. Some scripts are executed by cron jobs and
