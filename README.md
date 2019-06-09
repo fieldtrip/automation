@@ -1,4 +1,4 @@
-# FieldTrip webhook
+# FieldTrip automation
 
 This repository contains various scripts used to manage releases and to link the
 different development tools together. Some scripts are executed by cron jobs and
@@ -41,14 +41,14 @@ Pi. It does the following
 - synchronize the qsub repository on GitHub
 - send a tweet
 
-Another webhook is processed using the DCCN webhook service. It does the following
+Another webhook is processed using the [DCCN webhook](https://github.com/Donders-Institute/hpc-webhook) service. It does the following
 
 - recreate the reference documentation
 - update the copy of the FieldTrip on DCCN central storage
 
 ## fieldtrip/website
 
-This uses a webhook processed by the DCCN webhook service. It does the following
+This uses a webhook processed by the [DCCN webhook](https://github.com/Donders-Institute/hpc-webhook) service. It does the following
 
 - update the tags and push the update back to GitHub
 - rebuild the static version of the website
