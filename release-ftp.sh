@@ -35,4 +35,6 @@ else
   
   cp daily/fieldtrip-$TODAY.zip      /home/common/matlab/fieldtrip/data/ftp/fieldtrip-$TODAY.zip
   cp daily/fieldtrip-lite-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/fieldtrip-lite-$TODAY.zip
+  
+  cd $TRUNK && git tag $TODAY && git push upstream --tags
 fi
