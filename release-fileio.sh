@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
 MODULE=$(basename $0 .sh | sed 's/release-\(.*\)/\1/')
-TODAY=$(date +%Y%m%d)
 BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
 MD5FILE=$BASEDIR/.tarmd5-release-$MODULE
 
 cd $TRUNK && git checkout release && git pull upstream release
 
-cd $HOME/fieldtrip/release || exit 1
+# TODAY=$(date +%Y%m%d)
+# TODAY=$(git log -1 --format=%cd --date=format:%Y%m%d)
+TODAY=$(git log -1 --format=%cd --date=short | tr -d -)
+
+cd $BASEDIR || exit 1
 rsync -ar --copy-links --delete --exclude .git --exclude test $TRUNK/$MODULE/ release-$MODULE || exit 1
 
 CURRMD5=$(tar cf - release-$MODULE |md5sum |awk '{print $1}')

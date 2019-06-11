@@ -3,15 +3,17 @@
 #PBS -l walltime=00:05:00
 #PBS -l mem=100Mb
 
-TODAY=$(date +%Y%m%d)
 BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
 MD5FILE=$BASEDIR/.tarmd5-release-ftp
 
 cd $TRUNK && git checkout release && git pull upstream release
 
-cd $BASEDIR || exit 1
+# TODAY=$(date +%Y%m%d)
+# TODAY=$(git log -1 --format=%cd --date=format:%Y%m%d)
+TODAY=$(git log -1 --format=%cd --date=short | tr -d -)
 
+cd $BASEDIR || exit 1
 rsync -ar --copy-links --delete --exclude .git --exclude test $TRUNK/ release-ftp || exit 1
 
 CURRMD5=$(tar cf - release-ftp | md5sum |awk '{print $1}')
