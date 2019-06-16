@@ -11,11 +11,12 @@
 #
 
 # make it robust for running as a cron job
-GREP=/usr/bin/grep
 AWK=/usr/bin/awk
-LS=/usr/bin/ls
 GIT=/usr/bin/git
+GREP=/usr/bin/grep
+LS=/usr/bin/ls
 MAIL=/usr/bin/mail
+RSYNC=/opt/cluster/external/utilities/bin64/rsync
 
 TRUNK=$HOME/fieldtrip/release/fieldtrip
 DASHBOARDDIR=$HOME/fieldtrip/dashboard
@@ -24,7 +25,7 @@ REVISION=$1
 
 if [ -z "$REVISION" ] ; then
 # determine the revision of the latest version that ran
-REVISION=`$LS -al $DASHBOARDDIR/logs/latest | $AWK '{print $NF}'`
+REVISION=$(cat $DASHBOARDDIR/logs/latest/revision)
 fi
 
 # stop here if the revision cannot be determined

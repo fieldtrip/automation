@@ -10,5 +10,7 @@
 DASHBOARDDIR=$HOME/fieldtrip/dashboard
 TRUNK=$HOME/fieldtrip/release/fieldtrip
 
+cd $TRUNK && git checkout master && git pull upstream master
+
 $DASHBOARDDIR/schedule-batch.sh $TRUNK
 
