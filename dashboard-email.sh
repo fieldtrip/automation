@@ -13,5 +13,5 @@ LS=/usr/bin/ls
 LATEST=`$LS -al latest | $AWK '{print $NF}'`
 
 if ( $GREP --silent FAILED $LATEST/*.txt ) ; then
-  $GREP FAILED $LATEST/*.txt | mail -r r.oostenveld@donders.ru.nl -s "FAILED test in latest FieldTrip batch" r.oostenveld@donders.ru.nl,j.schoffelen@donders.ru.nl
+  $GREP FAILED $LATEST/*.txt | mail -r r.oostenveld@donders.ru.nl -s "FAILED tests in latest FieldTrip batch" r.oostenveld@donders.ru.nl,j.schoffelen@donders.ru.nl
 fi
