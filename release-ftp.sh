@@ -65,7 +65,7 @@ else
   curl -T daily/fieldtrip-lite-$TODAY.zip ftp://sccn.ucsd.edu/incoming/
 
   # notify Arno that new plugin versions are available for inclusion in EEGLAB
-  curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fileio-20190618.zip&version=$TODAY&name=fileio"
-  curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fieldtrip-lite-20190618.zip&version=$TODAY&name=fieldtrip-lite"
+  curl "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fileio-$TODAY.zip&version=$TODAY&name=Fileio"
+  curl "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fieldtrip-lite-$TODAY.zip&version=$TODAY&name=Fieldtrip-lite"
 fi
 
