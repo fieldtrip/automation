@@ -14,38 +14,45 @@ ZIP=/usr/bin/zip
 
 BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
-MD5FILE=$BASEDIR/.tarmd5-release-ftp
 
 cd $TRUNK && git checkout release && git pull upstream release
 
-# TODAY=$(date +%Y%m%d)
-# TODAY=$(git log -1 --format=%cd --date=format:%Y%m%d)
 TODAY=$(git log -1 --format=%cd --date=short | tr -d -)
+REVISION=$(cd $TRUNK && git rev-parse --short HEAD)
+BRANCH=$(cd $TRUNK && git rev-parse --abbrev-ref HEAD)
 
 cd $BASEDIR || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/ release-ftp || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/       release-ftp    || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/fileio release-fileio || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/qsub   release-qsub   || exit 1
 
-CURRMD5=$(tar cf - release-ftp | md5sum |awk '{print $1}')
-LASTMD5=$(cat $MD5FILE)
-if [[ "x$CURRMD5" = "x$LASTMD5" ]]
+LASTREVISION=$(cat revision)
+if [[ "x$REVISION" = "x$LASTREVISION" ]]
 then
   # the current release has not been updated compared to the previous
   exit 0
 else
   # the current release is an updated version
-  echo $CURRMD5 > $MD5FILE
+  echo $REVISION > revision
 
   # remove all older versions
-  rm daily/fieldtrip-201?????.zip
-  rm daily/fieldtrip-lite-201?????.zip
+  rm daily/*.zip
 
   mv release-ftp fieldtrip-$TODAY
   $ZIP -r daily/fieldtrip-$TODAY.zip fieldtrip-$TODAY
   $ZIP -r daily/fieldtrip-lite-$TODAY.zip fieldtrip-$TODAY -x@exclude.lite
   mv fieldtrip-$TODAY release-ftp
-  
-  cp daily/fieldtrip-$TODAY.zip      /home/common/matlab/fieldtrip/data/ftp/fieldtrip-$TODAY.zip
-  cp daily/fieldtrip-lite-$TODAY.zip /home/common/matlab/fieldtrip/data/ftp/fieldtrip-lite-$TODAY.zip
-  
+
+  mv release-fileio fileio-$TODAY
+  $ZIP -r daily/fileio-$TODAY.zip fileio-$TODAY
+  mv fileio-$TODAY release-fileio
+
+  mv release-qsub qsub-$TODAY
+  $ZIP -r daily/qsub-$TODAY.zip qsub-$TODAY
+  mv qsub-$TODAY release-qsub
+
+  # put all daily versions in place on the ftp server
+  cp daily/*.zip /home/common/matlab/fieldtrip/data/ftp
+
   cd $TRUNK && git tag $TODAY && git push upstream --tags
 fi
