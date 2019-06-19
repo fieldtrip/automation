@@ -57,5 +57,11 @@ else
   cp daily/fileio-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
   cp daily/qsub-$TODAY.zip            /home/common/matlab/fieldtrip/data/ftp/modules
 
+  # tag it, this autmatically results in a release on github
   cd $TRUNK && git tag $TODAY && git push upstream --tags
+
+  # notify Arno that new plugin versions are available for inclusion in EEGLAB
+  curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fileio-20190618.zip&version=$TODAY&name=fileio"
+  curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fieldtrip-lite-20190618.zip&version=$TODAY&name=fieldtrip-lite"
 fi
+
