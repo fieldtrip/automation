@@ -60,6 +60,10 @@ else
   # tag it, this autmatically results in a release on github
   cd $TRUNK && git tag $TODAY && git push upstream --tags
 
+  # push it to the EEGLAB ftp server
+  curl -T daily/fileio-$TODAY.zip         ftp://sccn.ucsd.edu/incoming/
+  curl -T daily/fieldtrip-lite-$TODAY.zip ftp://sccn.ucsd.edu/incoming/
+
   # notify Arno that new plugin versions are available for inclusion in EEGLAB
   curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fileio-20190618.zip&version=$TODAY&name=fileio"
   curl -X get "http://sccn.ucsd.edu/plugin_uploader/update_donders.php?file=fieldtrip-lite-20190618.zip&version=$TODAY&name=fieldtrip-lite"
