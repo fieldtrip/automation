@@ -52,7 +52,10 @@ else
   mv qsub-$TODAY release-qsub
 
   # put all daily versions in place on the ftp server
-  cp daily/*.zip /home/common/matlab/fieldtrip/data/ftp
+  cp daily/fieldtrip-$TODAY.zip       /home/common/matlab/fieldtrip/data/ftp
+  cp daily/fieldtrip-lite-$TODAY.zip  /home/common/matlab/fieldtrip/data/ftp
+  cp daily/fileio-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
+  cp daily/qsub-$TODAY.zip            /home/common/matlab/fieldtrip/data/ftp/modules
 
   cd $TRUNK && git tag $TODAY && git push upstream --tags
 fi
