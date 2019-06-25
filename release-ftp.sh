@@ -22,9 +22,10 @@ REVISION=$(cd $TRUNK && git rev-parse --short HEAD)
 BRANCH=$(cd $TRUNK && git rev-parse --abbrev-ref HEAD)
 
 cd $BASEDIR || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/       release-ftp    || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/fileio release-fileio || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/qsub   release-qsub   || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/                     release-ftp    || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/fileio/              release-fileio || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/qsub/                release-qsub   || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/realtime/src/buffer/ release-buffer || exit 1
 
 LASTREVISION=$(cat revision)
 if [[ "x$REVISION" = "x$LASTREVISION" ]]
@@ -51,11 +52,16 @@ else
   $ZIP -r daily/qsub-$TODAY.zip qsub-$TODAY
   mv qsub-$TODAY release-qsub
 
+  mv release-buffer buffer-$TODAY
+  $ZIP -r daily/buffer-$TODAY.zip buffer-$TODAY
+  mv buffer-$TODAY release-buffer
+
   # put all daily versions in place on the ftp server
   cp daily/fieldtrip-$TODAY.zip       /home/common/matlab/fieldtrip/data/ftp
   cp daily/fieldtrip-lite-$TODAY.zip  /home/common/matlab/fieldtrip/data/ftp
   cp daily/fileio-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
   cp daily/qsub-$TODAY.zip            /home/common/matlab/fieldtrip/data/ftp/modules
+  cp daily/buffer-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
 
   # tag it, this autmatically results in a release on github
   cd $TRUNK && git tag $TODAY && git push upstream --tags
