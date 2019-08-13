@@ -64,7 +64,6 @@ system('cd $TARGETDIR && git pull');
 system('rm $TARGETDIR/reference/*.md');
 ft_documentationreference('$TARGETDIR/reference');
 ft_documentationconfiguration('$TARGETDIR/reference/configuration.md');
-system('rm $TARGETDIR/reference/*-1.md');
 system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
 system('cd $TARGETDIR && git push');
 
@@ -77,4 +76,3 @@ EOF
 /home/mrphys/roboos/bin/matlab_sub --walltime 8:00:00 --mem 4gb $MATLABSCRIPT
 date > $LOGFILE
 rm $LOCKFILE
-
