@@ -11,6 +11,7 @@ LS=/usr/bin/ls
 MAIL=/usr/bin/mail
 RSYNC=/opt/cluster/external/utilities/bin64/rsync
 ZIP=/usr/bin/zip
+CURL=/usr/bin/curl
 
 BASEDIR=$HOME/fieldtrip/release
 TRUNK=$BASEDIR/fieldtrip
@@ -67,11 +68,11 @@ else
   cd $TRUNK && git tag $TODAY && git push upstream --tags
 
   # push it to the EEGLAB ftp server
-  curl -T daily/fileio-$TODAY.zip         ftp://sccn.ucsd.edu/incoming/
-  curl -T daily/fieldtrip-lite-$TODAY.zip ftp://sccn.ucsd.edu/incoming/
+  $CURL -T $BASEDIR/daily/fileio-$TODAY.zip         ftp://sccn.ucsd.edu/incoming/
+  $CURL -T $BASEDIR/daily/fieldtrip-lite-$TODAY.zip ftp://sccn.ucsd.edu/incoming/
 
   # notify Arno that new plugin versions are available for inclusion in EEGLAB
-  curl "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fileio-$TODAY.zip&version=$TODAY&name=Fileio"
-  curl "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fieldtrip-lite-$TODAY.zip&version=$TODAY&name=Fieldtrip-lite"
+  $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fileio-$TODAY.zip&version=$TODAY&name=Fileio"
+  $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fieldtrip-lite-$TODAY.zip&version=$TODAY&name=Fieldtrip-lite"
 fi
 
