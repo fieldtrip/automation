@@ -22,8 +22,8 @@
 # You can also define these values in another file named .twitterkeys
 # by placing it in the same directory.
 
-if [ -f .secret ]; then
-    source .secret
+if [ -f .secret.sh ]; then
+    source .secret.sh
 fi
 
 #########################################################################
