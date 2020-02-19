@@ -2,6 +2,8 @@
 
 #########################################################################
 
+# URL: https://github.com/agubelu/bash-send-tweet
+
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -20,13 +22,8 @@
 # You can also define these values in another file named .twitterkeys
 # by placing it in the same directory.
 
-CONSUMER_KEY='SPg4RX8Zdn5nxzP01IgCQGGQB'
-CONSUMER_SECRET='TmjRpOV6s2ASI5Dh8mBjM3f0s91zh4hemc82S4cbQxHQgRXlng'
-ACCESS_TOKEN='83097255-kg1p0lozz3SVJcP3h8A9IH88AQVx2I5YZBMZn77aC'
-ACCESS_TOKEN_SECRET='Y5VgH8ewwYNjB2GvNgTkEGROnnmne76cwUBYjAGhE4lIU'
-
-if [ -f .twitterkeys ]; then
-    source .twitterkeys
+if [ -f .secret ]; then
+    source .secret
 fi
 
 #########################################################################
