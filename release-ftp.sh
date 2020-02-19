@@ -64,6 +64,9 @@ else
   cp daily/qsub-$TODAY.zip            /home/common/matlab/fieldtrip/data/ftp/modules
   cp daily/buffer-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
 
+  # Tweet about it using (sendweet.sh)
+  ./sendtweet "A New fieldtrip version "$TODAY" is out! Make sure you have our latest and finest :) "
+
   # tag it, this autmatically results in a release on github
   cd $TRUNK && git tag $TODAY && git push upstream --tags
 
@@ -75,4 +78,3 @@ else
   $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fileio-$TODAY.zip&version=$TODAY&name=Fileio"
   $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fieldtrip-lite-$TODAY.zip&version=$TODAY&name=Fieldtrip-lite"
 fi
-
