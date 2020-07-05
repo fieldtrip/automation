@@ -1,5 +1,5 @@
 {
-  "name": "FieldTrip webhook server",
+  "name": "fieldtrip-webhook-server",
   "version": "1.0.0",
   "description": "",
   "main": "webhook.js",
