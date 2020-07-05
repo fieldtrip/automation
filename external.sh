@@ -14,7 +14,7 @@ cd $EXTERNALDIR
 for TOOLBOX in * ; do
   cd $TOOLBOX 
   git pull 
-  echo rsync -arpv --exclude .git $EXTERNALDIR/$TOOLBOX/ $FIELDTRIPDIR/external/$TOOLBOX/
+  rsync -arpv --exclude .git $EXTERNALDIR/$TOOLBOX/ $FIELDTRIPDIR/external/$TOOLBOX/
   cd $EXTERNALDIR
 done
 
