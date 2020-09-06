@@ -4,6 +4,22 @@
 # the latest tag/release to the one before.
 #
 
+# make it robust for running as a cron job
+AWK=/usr/bin/awk
+CAT=/usr/bin/cat
+CURL=/usr/bin/curl
+GIT=/usr/bin/git
+GREP=/usr/bin/grep
+HEAD=/usr/bin/head
+HUB=$HOME/.conda/envs/hub/bin/hub
+LS=/usr/bin/ls
+MAIL=/usr/bin/mail
+MKTEMP=/usr/bin/mktemp
+RSYNC=/opt/cluster/external/utilities/bin64/rsync
+SORT=/usr/bin/sort
+TAIL=/usr/bin/tail
+ZIP=/usr/bin/zip
+
 TARGETDIR=$HOME/fieldtrip/release/website
 TRUNK=$HOME/fieldtrip/release/fieldtrip
 
@@ -11,8 +27,8 @@ TRUNK=$HOME/fieldtrip/release/fieldtrip
 
 cd $TRUNK || exit 1
 
-CURRENT=`git tag | grep 20..... | sort | tail -1 | head -1`
-PREVIOUS=`git tag | grep 20..... | sort | tail -2 | head -1`
+CURRENT=`$GIT tag | $GREP 20..... | $SORT | $TAIL -1 | $HEAD -1`
+PREVIOUS=`$GIT tag | $GREP 20..... | $SORT | $TAIL -2 | $HEAD -1`
 
 YYYY=${CURRENT:0:4}
 MM=${CURRENT:4:2}
@@ -45,9 +61,9 @@ MONTH=December
 fi
 
 RELEASEURL="[$CURRENT](http://github.com/fieldtrip/fieldtrip/releases/tag/$CURRENT)"
-TEMPFILE=`mktemp`
+TEMPFILE=`$MKTEMP`
 
-cat > $TEMPFILE << EOF
+$CAT > $TEMPFILE << EOF
 ---
 title: $DD $MONTH $YYYY - FieldTrip version $CURRENT has been released
 categories: [news, release]
@@ -62,14 +78,14 @@ FieldTrip version $RELEASEURL has been released.
 EOF
 
 # use awk to convert it into a list and to add the URL to each commit
-git log --oneline $PREVIOUS...$CURRENT | awk '$1="- ["$1"](http://github.com/fieldtrip/fieldtrip/commit/"$1")"' >> $TEMPFILE
+$GIT log --oneline $PREVIOUS...$CURRENT | $AWK '$1="- ["$1"](http://github.com/fieldtrip/fieldtrip/commit/"$1")"' >> $TEMPFILE
 
 ##############################################################################
 
 # the following uses https://github.com/github/hub
 # which is installed using anaconda
-module load anaconda3
-source activate hub
+# module load anaconda3
+# source activate hub
 
 cd $TARGETDIR || exit 1
 
@@ -78,14 +94,14 @@ if [ -e "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
 exit 0
 fi
 
-git checkout master
-git pull origin master
-git checkout -b $YYYY-$MM-$DD-release
+$GIT checkout master
+$GIT pull origin master
+$GIT checkout -b $YYYY-$MM-$DD-release
 cp $TEMPFILE "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
-git add "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
-git commit -am "added news item for release"
-git push --set-upstream origin $YYYY-$MM-$DD-release
-# hub pull-request -m "add news item for release $CURRENT"
-git checkout master
-git branch -D $YYYY-$MM-$DD-release
+$GIT add "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
+$GIT commit -am "added news item for release"
+$GIT push --set-upstream origin $YYYY-$MM-$DD-release
+# $HUB pull-request -m "add news item for release $CURRENT"
+$GIT checkout master
+$GIT branch -D $YYYY-$MM-$DD-release
 
