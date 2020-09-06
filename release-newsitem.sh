@@ -11,8 +11,8 @@ TRUNK=$HOME/fieldtrip/release/fieldtrip
 
 cd $TRUNK || exit 1
 
-CURRENT=`git tag | grep 20..... | sort | tail -4`
-PREVIOUS=`git tag | grep 20..... | sort | tail -5 | head -1`
+CURRENT=`git tag | grep 20..... | sort | tail -1 | head -1`
+PREVIOUS=`git tag | grep 20..... | sort | tail -2 | head -1`
 
 YYYY=${CURRENT:0:4}
 MM=${CURRENT:4:2}
