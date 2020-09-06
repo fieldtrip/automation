@@ -9,47 +9,37 @@ or [fieldtrip/website](https://github.com/fieldtrip/website) repositories.
 The documentation on <http://www.fieldtriptoolbox.org/development/integration>
 has some additional details.
 
-This repository also contains a simple webhook server that is implemented using
-[Node.js](https://nodejs.org/en/). It can be used to execute Bash scripts and it
-also includes some code to send a tweet. To start the webhook server, you should
-execute the following
-
-```
-source ./secret.sh
-nvm use v4.2.6
-node webhook.js
-```
-
-To start the server in the background and ensure that it keeps running, also on the occasional error due to unhandled exceptions, you can use [forever](https://www.npmjs.com/package/forever) and start it like this
-
-
-```
-source ./secret.sh
-nvm use v4.2.6
-forever start webhook.js
-```
-
 
 ## fieldtrip/fieldtrip
 
-One webhook is processed by the webhook server running on a dedicated Raspberry
-Pi. It does the following
+This uses a webhook processed by the [DCCN webhook](https://github.com/Donders-Institute/hpc-webhook) service. It does the following
 
-- synchronize identical files in the different private directories and push the update back to GitHub
-- synchronize the GitHub repository to BitBucket and Gitlab
-- synchronize the fileio repository on GitHub
-- synchronize the qsub repository on GitHub
 - send a tweet
-
-Another webhook is processed using the [DCCN webhook](https://github.com/Donders-Institute/hpc-webhook) service. It does the following
-
+- github maintenance
+  - synchronize identical files in the different private directories and push the update back to GitHub
+  - synchronize the GitHub repository to BitBucket and Gitlab
+  - synchronize the fileio repository on GitHub
+  - synchronize the qsub repository on GitHub
 - recreate the reference documentation
-- update the copy of the FieldTrip on DCCN central storage
+
 
 ## fieldtrip/website
 
 This uses a webhook processed by the [DCCN webhook](https://github.com/Donders-Institute/hpc-webhook) service. It does the following
 
-- update the tags and push the update back to GitHub
-- rebuild the static version of the website
-- add some assets to the website that are not part of the repository
+- rebuild the website
+  - update the tags and push the update back to GitHub
+  - rebuild the static version of the website
+  - add some assets that are not part of the repository
+
+
+## cronjob
+
+Furthermore there are a number of daily jobs running in a cronjob on the DCCN compute cluster. These take care of the following
+
+- execute all test scripts using the dashboard batch
+   - at the end this will check whether all tests passed, merge changes to the release branch and make a tag
+- send an email with the latest dashboard results
+- make the latest release available on the ftp server
+- make the latest release available at the DCCN under home/common
+
