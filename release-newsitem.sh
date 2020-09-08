@@ -27,51 +27,52 @@ TRUNK=$HOME/fieldtrip/release/fieldtrip
 
 cd $TRUNK || exit 1
 
-CURRENT=`$GIT tag | $GREP 20..... | $SORT | $TAIL -1 | $HEAD -1`
-PREVIOUS=`$GIT tag | $GREP 20..... | $SORT | $TAIL -2 | $HEAD -1`
+CURRENT=`$GIT tag | $GREP 20..... | $SORT | $TAIL -5 | $HEAD -1`
+PREVIOUS=`$GIT tag | $GREP 20..... | $SORT | $TAIL -4 | $HEAD -1`
 
 YYYY=${CURRENT:0:4}
 MM=${CURRENT:4:2}
 DD=${CURRENT:6:2}
 
-if [ $MM==01 ] ; then
+if [ $MM == 01 ] ; then
 MONTH=January
-elif [ $MM==02 ] ; then
+elif [ $MM == 02 ] ; then
 MONTH=February
-elif [ $MM==03 ] ; then
+elif [ $MM == 03 ] ; then
 MONTH=March
-elif [ $MM==04 ] ; then
+elif [ $MM == 04 ] ; then
 MONTH=April
-elif [ $MM==05 ] ; then
+elif [ $MM == 05 ] ; then
 MONTH=May
-elif [ $MM==06 ] ; then
+elif [ $MM == 06 ] ; then
 MONTH=June
-elif [ $MM==07 ] ; then
+elif [ $MM == 07 ] ; then
 MONTH=July
-elif [ $MM==08 ] ; then
+elif [ $MM == 08 ] ; then
 MONTH=August
-elif [ $MM==09 ] ; then
+elif [ $MM == 09 ] ; then
 MONTH=September
-elif [ $MM==10 ] ; then
+elif [ $MM == 10 ] ; then
 MONTH=October
-elif [ $MM==11 ] ; then
+elif [ $MM == 11 ] ; then
 MONTH=November
-elif [ $MM==12 ] ; then
+elif [ $MM == 12 ] ; then
 MONTH=December
 fi
 
-RELEASEURL="[$CURRENT](http://github.com/fieldtrip/fieldtrip/releases/tag/$CURRENT)"
 TEMPFILE=`$MKTEMP`
 
 $CAT > $TEMPFILE << EOF
 ---
 title: $DD $MONTH $YYYY - FieldTrip version $CURRENT has been released
 categories: [news, release]
+tweet: FieldTrip version $CURRENT was just released. See http://www.fieldtriptoolbox.org/#$DD-$MONTH-$YYYY
 ---
 
 ### $DD $MONTH, $YYYY
 
-FieldTrip version $RELEASEURL has been released.
+FieldTrip version [$CURRENT](http://github.com/fieldtrip/fieldtrip/releases/tag/$CURRENT) has been released.
+See [GitHub](https://github.com/fieldtrip/fieldtrip/compare/$PREVIOUS...$CURRENT) for the detailled list of updates.
 
 #### Commits
 
@@ -89,19 +90,20 @@ $GIT log --oneline $PREVIOUS...$CURRENT | $AWK '$1="- ["$1"](http://github.com/f
 
 cd $TARGETDIR || exit 1
 
-if [ -e "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
-# there is already a news item for this release
-exit 0
-fi
-
 $GIT checkout master
 $GIT pull origin master
+
+if [ -e "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
+echo there is already a news item for this release
+# exit 0
+fi
+
 $GIT checkout -b $YYYY-$MM-$DD-release
 cp $TEMPFILE "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
 $GIT add "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
 $GIT commit -am "added news item for release"
 $GIT push --set-upstream origin $YYYY-$MM-$DD-release
-# $HUB pull-request -m "add news item for release $CURRENT"
+$HUB pull-request -m "add news item for release $CURRENT"
 $GIT checkout master
 $GIT branch -D $YYYY-$MM-$DD-release
 
