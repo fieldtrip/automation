@@ -60,13 +60,16 @@ elif [ $MM == 12 ] ; then
 MONTH=December
 fi
 
+# the  title has the month with the first letter in uppercase, the HTML anchor is all in lowercase
+LOWERCASE=`echo $MONTH | sed -e 's/^./\L&\E/'`
+
 TEMPFILE=`$MKTEMP`
 
 $CAT > $TEMPFILE << EOF
 ---
 title: $DD $MONTH $YYYY - FieldTrip version $CURRENT has been released
 categories: [news, release]
-tweet: FieldTrip version $CURRENT was just released. See http://www.fieldtriptoolbox.org/#$DD-$MONTH-$YYYY
+tweet: FieldTrip version $CURRENT was just released. See http://www.fieldtriptoolbox.org/#$DD-$LOWERCASE-$YYYY
 ---
 
 ### $DD $MONTH, $YYYY
@@ -94,8 +97,8 @@ $GIT checkout master
 $GIT pull origin master
 
 if [ -e "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
-echo there is already a news item for this release
-# exit 0
+  echo there is already a news item for this release
+  exit 0
 fi
 
 $GIT checkout -b $YYYY-$MM-$DD-release

@@ -40,8 +40,11 @@ if [ ! -z "$MESSAGE" ] ; then
 HASH=`echo "$MESSAGE" | md5sum | cut -f 1 -d " "`
 
 if ! $( grep -q $HASH $HASHFILE ) ; then
-t update "$MESSAGE"
-echo $HASH >> $HASHFILE
+  echo sending tweet: "$MESSAGE"
+  t update "$MESSAGE"
+  echo $HASH >> $HASHFILE
+else
+  echo not sending tweet: "$MESSAGE"
 fi
 
 fi   # the message is not empty
