@@ -68,7 +68,7 @@ TEMPFILE=`$MKTEMP`
 $CAT > $TEMPFILE << EOF
 ---
 title: $DD $MONTH $YYYY - FieldTrip version $CURRENT has been released
-categories: [news, release]
+categories: [release]
 tweet: FieldTrip version $CURRENT was just released. See http://www.fieldtriptoolbox.org/#$DD-$LOWERCASE-$YYYY
 ---
 
