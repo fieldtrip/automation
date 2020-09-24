@@ -105,8 +105,7 @@ $GIT checkout -b $YYYY-$MM-$DD-release
 cp $TEMPFILE "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
 $GIT add "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
 $GIT commit -am "added news item for release"
-$GIT push --set-upstream origin $YYYY-$MM-$DD-release
-$HUB pull-request -m "add news item for release $CURRENT"
+$GIT push --set-upstream origin $YYYY-$MM-$DD-release && $HUB pull-request -m "add news item for release $CURRENT"
 $GIT checkout master
 $GIT branch -D $YYYY-$MM-$DD-release
 
