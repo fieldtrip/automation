@@ -75,7 +75,7 @@ tweet: FieldTrip version $CURRENT was just released. See http://www.fieldtriptoo
 ### $DD $MONTH, $YYYY
 
 FieldTrip version [$CURRENT](http://github.com/fieldtrip/fieldtrip/releases/tag/$CURRENT) has been released.
-See [GitHub](https://github.com/fieldtrip/fieldtrip/compare/$PREVIOUS...$CURRENT) for the detailled list of updates.
+See [GitHub](https://github.com/fieldtrip/fieldtrip/compare/$PREVIOUS...$CURRENT) for the detailed list of updates.
 
 #### Commits
 
