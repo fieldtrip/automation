@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-LOGDIR=$HOME/fieldtrip/dashboard/logs
-
-cd $LOGDIR
-
 # make it robust for running as a cron job
 GREP=/usr/bin/grep
 AWK=/usr/bin/awk
 LS=/usr/bin/ls
+CHMOD=/usr/bin/chmod
+
+LOGDIR=$HOME/fieldtrip/dashboard/logs
+
+# allow other team members to read the log files
+$CHMOD 644 $LOGDIR/latest/*
+
+cd $LOGDIR
 
 # determine the latest version that ran
 LATEST=`$LS -al latest | $AWK '{print $NF}'`
