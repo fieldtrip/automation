@@ -7,8 +7,6 @@ FIELDTRIPDIR=$HOME/fieldtrip/fieldtrip
 FILEIODIR=$HOME/fieldtrip/fileio
 QSUBDIR=$HOME/fieldtrip/qsub
 
-date > $LOGFILE
-
 # get all changes from the master branch on github
 cd $FIELDTRIPDIR
 git checkout master
@@ -41,3 +39,4 @@ git add .
 git commit -am "synchronized with main FieldTrip repository"
 git push
 
+date > $LOGFILE

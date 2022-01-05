@@ -74,5 +74,6 @@ EOF
 # schedule the MATLAB script for execution
 # note that it uses my own matlab_sub, which deals with mem and time
 $HOME/bin/matlab_sub --walltime 8:00:00 --mem 4gb $MATLABSCRIPT
+
 date > $LOGFILE
 rm $LOCKFILE

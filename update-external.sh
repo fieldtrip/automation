@@ -8,12 +8,10 @@ LOGFILE="$FILEPATH"/"$CMDFILE".log
 FIELDTRIPDIR=$HOME/fieldtrip/fieldtrip
 EXTERNALDIR=$HOME/fieldtrip/external
 
-date > $LOGFILE
-
 cd $EXTERNALDIR
 for TOOLBOX in * ; do
-  cd $TOOLBOX 
-  git pull 
+  cd $TOOLBOX
+  git pull
   rsync -arpv --exclude .git $EXTERNALDIR/$TOOLBOX/ $FIELDTRIPDIR/external/$TOOLBOX/
   cd $EXTERNALDIR
 done
@@ -22,3 +20,4 @@ cd $FIELDTRIPDIR
 git commit -am "automatically updated external toolboxes"
 git push
 
+date > $LOGFILE
