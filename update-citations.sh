@@ -37,16 +37,20 @@ TARGETDIR=$HOME/fieldtrip/release/website
 
 SCRIPTDIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 
-# module load anaconda3
-conda activate citations
+# start DCCN environment
+source /opt/optenv.sh
+module load anaconda3
+source activate citations
 
 cd $TARGETDIR/_data/citedby || exit
 $SCRIPTDIR/update-citations.py
 
 cd $TARGETDIR
+git checkout master || exit
+git pull origin master || exit
 git add _data/citedby/*.yml
 git commit -am "added papers from Pubmed that cite FieldTrip"
-git push
+git push origin master
 
 date > $LOGFILE
 rm $LOCKFILE
