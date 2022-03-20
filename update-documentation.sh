@@ -61,10 +61,11 @@ ft_defaults
 
 % create the reference documentation
 system('cd $TARGETDIR && git pull');
-system('rm $TARGETDIR/reference/*.md');
+% system('rm $TARGETDIR/reference/*.md');
 % ft_documentationreference('$TARGETDIR/reference');
-ft_documentationconfiguration('$TARGETDIR/reference/configuration.md');
-system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
+% system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
+ft_documentationconfiguration('$TARGETDIR/configuration.md');
+system('cd $TARGETDIR && git add configuration.md && git commit -m "updated configuration index"');
 system('cd $TARGETDIR && git push');
 
 end % try
