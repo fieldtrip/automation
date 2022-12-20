@@ -21,6 +21,12 @@ SORT=/usr/bin/sort
 TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
 
+T=$HOME/.rvm/gems/ruby-2.5.3/bin/t
+
+TOOTCONFIG=/home/megmethods/roboos/.mastodon.json
+TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot
+NODE=$HOME/.nvm/versions/node/v16.18.1/bin/node
+
 TRUNK=$HOME/fieldtrip/release/website
 HASHFILE=$HOME/fieldtrip/.tweethash
 
@@ -40,11 +46,12 @@ if [ ! -z "$MESSAGE" ] ; then
 HASH=`echo "$MESSAGE" | md5sum | cut -f 1 -d " "`
 
 if ! $( grep -q $HASH $HASHFILE ) ; then
-  echo sending tweet: "$MESSAGE"
-  t update "$MESSAGE"
+  echo sending tweet and toot: "$MESSAGE"
+  $T update "$MESSAGE"
+  echo "$MESSAGE" | $NODE $TOOT --config "$TOOTCONFIG"
   echo $HASH >> $HASHFILE
 else
-  echo not sending tweet: "$MESSAGE"
+  echo not sending tweet or toot: "$MESSAGE"
 fi
 
 fi   # the message is not empty
