@@ -32,10 +32,10 @@ $RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/realtime/s
 LASTREVISION=$(cat revision)
 if [[ "x$REVISION" = "x$LASTREVISION" ]]
 then
-  # the current release has not been updated compared to the previous
+  echo the current release has not been updated compared to the previous
   exit 0
 else
-  # the current release is an updated version
+  echo the current release is an updated version
   echo $REVISION > revision
 
   # remove all older versions
