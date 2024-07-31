@@ -14,20 +14,23 @@ ZIP=/usr/bin/zip
 CURL=/usr/bin/curl
 SCP=/usr/bin/scp
 
-BASEDIR=$HOME/fieldtrip/release
-TRUNK=$BASEDIR/fieldtrip
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+RELEASEDIR=$PROJECTDIR/fieldtrip/release
+FTPDIR=/home/common/matlab/fieldtrip/data/ftp
 
-cd $TRUNK && git checkout release && git pull upstream release
+cd $FIELDTRIPDIR && git checkout release && git pull upstream release
 
 TODAY=$(git log -1 --format=%cd --date=short | tr -d -)
-REVISION=$(cd $TRUNK && git rev-parse --short HEAD)
-BRANCH=$(cd $TRUNK && git rev-parse --abbrev-ref HEAD)
+REVISION=$(cd $FIELDTRIPDIR && git rev-parse --short HEAD)
+BRANCH=$(cd $FIELDTRIPDIR && git rev-parse --abbrev-ref HEAD)
 
-cd $BASEDIR || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/                     release-ftp    || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/fileio/              release-fileio || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/qsub/                release-qsub   || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git --exclude test $TRUNK/realtime/src/buffer/ release-buffer || exit 1
+cd $RELEASEDIR || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/                     $RELEASEDIR/release-ftp    || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/fileio/              $RELEASEDIR/release-fileio || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/qsub/                $RELEASEDIR/release-qsub   || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/realtime/src/buffer/ $RELEASEDIR/release-buffer || exit 1
 
 LASTREVISION=$(cat revision)
 if [[ "x$REVISION" = "x$LASTREVISION" ]]
@@ -59,14 +62,14 @@ else
   mv buffer-$TODAY release-buffer
 
   # put all daily versions in place on the ftp server
-  cp daily/fieldtrip-$TODAY.zip       /home/common/matlab/fieldtrip/data/ftp
-  cp daily/fieldtrip-lite-$TODAY.zip  /home/common/matlab/fieldtrip/data/ftp
-  cp daily/fileio-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
-  cp daily/qsub-$TODAY.zip            /home/common/matlab/fieldtrip/data/ftp/modules
-  cp daily/buffer-$TODAY.zip          /home/common/matlab/fieldtrip/data/ftp/modules
+  cp daily/fieldtrip-$TODAY.zip       $FTPDIR
+  cp daily/fieldtrip-lite-$TODAY.zip  $FTPDIR
+  cp daily/fileio-$TODAY.zip          $FTPDIR/modules
+  cp daily/qsub-$TODAY.zip            $FTPDIR/modules
+  cp daily/buffer-$TODAY.zip          $FTPDIR/modules
 
   # tag it, this autmatically results in a release on github
-  cd $TRUNK && git tag $TODAY && git push upstream --tags
+  cd $FIELDTRIPDIR && git tag $TODAY && git push upstream --tags
 
   # push it to the EEGLAB server
   $SCP $BASEDIR/daily/fileio-$TODAY.zip         fieldtrip@sccn.ucsd.edu:upload

@@ -27,14 +27,16 @@ TOOTCONFIG=/home/megmethods/roboos/.mastodon.json
 TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot
 NODE=$HOME/.nvm/versions/node/v16.18.1/bin/node
 
-TRUNK=$HOME/fieldtrip/release/website
-HASHFILE=$HOME/fieldtrip/.tweethash
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+HASHFILE=$PROJECTDIR/fieldtrip/.tweethash
 
 touch $HASHFILE
 
 ##############################################################################
 
-cd $TRUNK || exit 1
+cd $WEBSITEDIR || exit 1
 
 $GIT checkout master > /dev/null 2>&1
 $GIT pull origin master > /dev/null 2>&1

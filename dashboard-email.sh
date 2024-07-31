@@ -6,12 +6,14 @@ AWK=/usr/bin/awk
 LS=/usr/bin/ls
 CHMOD=/usr/bin/chmod
 
-LOGDIR=$HOME/fieldtrip/dashboard/logs
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+LOGDIR=$PROJECTDIR/fieldtrip/dashboard/logs
 
 # allow other team members to read the log files
 $CHMOD 644 $LOGDIR/latest/*
 
-cd $LOGDIR
+cd $LOGDIR || exit
 
 # determine the latest version that ran
 LATEST=`$LS -al latest | $AWK '{print $NF}'`

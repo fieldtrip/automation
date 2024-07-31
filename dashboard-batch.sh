@@ -7,10 +7,12 @@
 #   schedule-batch.sh <FIELDTRIPDIR> <LOGDIR>
 #   schedule-batch.sh <FIELDTRIPDIR>
 
-DASHBOARDDIR=$HOME/fieldtrip/dashboard
-TRUNK=$HOME/fieldtrip/release/fieldtrip
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 
-cd $TRUNK && git checkout master && git pull upstream master
+cd $FIELDTRIPDIR && git checkout master && git pull upstream master
 
-$DASHBOARDDIR/schedule-batch.sh $TRUNK
+$DASHBOARDDIR/schedule-batch.sh $FIELDTRIPDIR
 

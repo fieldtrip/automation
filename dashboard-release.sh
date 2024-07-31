@@ -18,8 +18,10 @@ LS=/usr/bin/ls
 MAIL=/usr/bin/mail
 RSYNC=/opt/cluster/external/utilities/bin64/rsync
 
-TRUNK=$HOME/fieldtrip/release/fieldtrip
-DASHBOARDDIR=$HOME/fieldtrip/dashboard
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 
 REVISION=$1
 
@@ -42,7 +44,7 @@ if [ $PASSED -gt 600 ]; then
 
 echo merging $LATEST into release
 
-cd $TRUNK && $GIT checkout master && $GIT pull upstream master && $GIT checkout release
+cd $FIELDTRIPDIR && $GIT checkout master && $GIT pull upstream master && $GIT checkout release
 $GIT log -1 $REVISION || exit 1
 $GIT merge $REVISION
 $GIT push upstream release

@@ -20,12 +20,14 @@ SORT=/usr/bin/sort
 TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
 
-TARGETDIR=$HOME/fieldtrip/release/website
-TRUNK=$HOME/fieldtrip/release/fieldtrip
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+WEBSITEDIR=$PROJECTDIR/fieldtrip/website
 
 ##############################################################################
 
-cd $TRUNK || exit 1
+cd $FIELDTRIPDIR || exit 1
 
 CURRENT=`$GIT tag | $GREP 20..... | $SORT | $TAIL -1 | $HEAD -1`
 PREVIOUS=`$GIT tag | $GREP 20..... | $SORT | $TAIL -2 | $HEAD -1`
@@ -91,19 +93,19 @@ $GIT log --oneline $PREVIOUS...$CURRENT | $AWK '$1="- ["$1"](http://github.com/f
 # module load anaconda3
 # source activate hub
 
-cd $TARGETDIR || exit 1
+cd $WEBSITEDIR || exit 1
 
 $GIT checkout master
 $GIT pull origin master
 
-if [ -e "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
+if [ -e "$WEBSITEDIR/_posts/$YYYY-$MM-$DD-release.md" ] ; then
   echo there is already a news item for this release
   exit 0
 fi
 
 $GIT checkout -b $YYYY-$MM-$DD-release
-cp $TEMPFILE "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
-$GIT add "$TARGETDIR/_posts/$YYYY-$MM-$DD-release.md"
+cp $TEMPFILE "$WEBSITEDIR/_posts/$YYYY-$MM-$DD-release.md"
+$GIT add "$WEBSITEDIR/_posts/$YYYY-$MM-$DD-release.md"
 $GIT commit -am "added news item for release"
 $GIT push --set-upstream origin $YYYY-$MM-$DD-release && $HUB pull-request -m "add news item for release $CURRENT"
 $GIT checkout master

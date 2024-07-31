@@ -12,15 +12,19 @@ MAIL=/usr/bin/mail
 RSYNC=/opt/cluster/external/utilities/bin64/rsync
 ZIP=/usr/bin/zip
 
-TRUNK=$HOME/fieldtrip/release/fieldtrip
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+RELEASEDIR=$PROJECTDIR/fieldtrip/release
+SHAREDDIR=/home/common/matlab/fieldtrip
 
-cd $TRUNK && $GIT checkout release && $GIT pull upstream release
+cd $FIELDTRIPDIR && $GIT checkout release && $GIT pull upstream release
 
-cd $HOME/fieldtrip/release || exit 1
-$RSYNC -ar --copy-links --delete --exclude .git $TRUNK/ release-nijmegen || exit 1
+cd $RELEASEDIR || exit 1
+$RSYNC -ar --copy-links --delete --exclude .git $FIELDTRIPDIR/ $RELEASEDIR/release-nijmegen || exit 1
 # find . -type f -exec chmod 644 {} \;
 # find . -type d -exec chmod 755 {} \;
 
-# update the home/common version
-$RSYNC -ar --delete --exclude data $HOME/fieldtrip/release/release-nijmegen/ /home/common/matlab/fieldtrip || exit 1
+# update the version on the shared directory
+$RSYNC -ar --delete --exclude data $RELEASEDIR/release-nijmegen/ $SHAREDDIR || exit 1
 

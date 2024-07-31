@@ -6,8 +6,12 @@
 # this script is started either from a cronjob or a webhook and it updates
 # http://www.fieldtriptoolbox.org/citation/
 
-LOCKFILE=$HOME/citations.lock
-LOGFILE=$HOME/citations.log
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+LOCKFILE=$PROJECTDIR/fieldtrip/citations.lock
+LOGFILE=$PROJECTDIR/fieldtrip/citations.log
+WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+SCRIPTDIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 
 if [ "$(uname)" == "Darwin" ]; then
   STAT=$(which gstat)
@@ -33,19 +37,16 @@ done
 [[ -e $LOGFILE  ]] || touch $LOGFILE
 [[ -e $LOCKFILE ]] || touch $LOCKFILE
 
-TARGETDIR=$HOME/fieldtrip/release/website
 
-SCRIPTDIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-
-# start DCCN environment
+# set up the appropriate conda environment
 source /opt/optenv.sh
 module load anaconda3
 source activate citations
 
-cd $TARGETDIR/_data/citedby || exit
+cd $WEBSITEDIR/_data/citedby || exit
 $SCRIPTDIR/update-citations.py
 
-cd $TARGETDIR
+cd $WEBSITEDIR || exit
 git checkout master || exit
 git pull origin master || exit
 git add _data/citedby/*.yml

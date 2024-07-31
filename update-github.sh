@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
 
-FILEPATH=`dirname "$0"`
-CMDFILE=`basename "$0" .sh`
-LOGFILE="$FILEPATH"/"$CMDFILE".log
-FIELDTRIPDIR=$HOME/fieldtrip/fieldtrip
-FILEIODIR=$HOME/fieldtrip/fileio
-QSUBDIR=$HOME/fieldtrip/qsub
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+FILEIODIR=$PROJECTDIR/fieldtrip/fileio
+QSUBDIR=$PROJECTDIR/fieldtrip/qsub
+
+LOGFILE=$PROJECTDIR/fieldtrip/github.log
 
 # get all changes from the master branch on github
-cd $FIELDTRIPDIR
+cd $FIELDTRIPDIR || exit
 git checkout master
-git pull origin master
+git pull upstream master
 
 # synchronize identical files
 # if there are no changes, this will give "nothing to commit, working directory clean"
 REV=`git log -n 1 --pretty=format:"%H"`
 $FIELDTRIPDIR/bin/synchronize-private.sh
 git commit -a -m "automatically synchronized identical files to $REV"
-git push origin master
+git push upstream master
 
 # also push to bitbucket
 git push bitbucket master
@@ -26,14 +27,14 @@ git push bitbucket master
 git push gitlab master
 
 # synchronize the fileio repository
-cd $FILEIODIR
+cd $FILEIODIR || exit
 rsync -arp --delete --exclude '.git' $FIELDTRIPDIR/fileio/* .
 git add .
 git commit -am "synchronized with main FieldTrip repository"
 git push
 
 # synchronize the qsub repository
-cd $QSUBDIR
+cd $QSUBDIR || exit
 rsync -arp --delete --exclude '.git' $FIELDTRIPDIR/qsub/* .
 git add .
 git commit -am "synchronized with main FieldTrip repository"

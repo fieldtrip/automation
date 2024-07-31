@@ -7,8 +7,13 @@
 # http://www.fieldtriptoolbox.org/reference/
 # http://www.fieldtriptoolbox.org/reference/configuration
 
-LOCKFILE=$HOME/documentation.lock
-LOGFILE=$HOME/documentation.log
+# specify working directories
+PROJECTDIR=/project/3011231.02/
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+
+LOCKFILE=$PROJECTDIR/fieldtrip/documentation.lock
+LOGFILE=$PROJECTDIR/fieldtrip/documentation.log
 
 # prevent concurrent builds
 while [[ -e $LOCKFILE ]] ; do
@@ -26,8 +31,6 @@ done
 [[ -e $LOGFILE  ]] || touch $LOGFILE
 [[ -e $LOCKFILE ]] || touch $LOCKFILE
 
-TRUNK=$HOME/fieldtrip/release/fieldtrip
-TARGETDIR=$HOME/fieldtrip/release/website
 MATLABSCRIPT=$HOME/fieldtrip_reference.m
 
 # create the MATLAB script
@@ -35,38 +38,38 @@ cat > $MATLABSCRIPT << EOF
 try,
 % set up the path
 restoredefaultpath
-addpath('$TRUNK');
-addpath('$TRUNK/connectivity');
-addpath('$TRUNK/contrib/misc');
-addpath('$TRUNK/contrib/nutmegtrip');
-addpath('$TRUNK/contrib/spike');
-addpath('$TRUNK/engine');
-addpath('$TRUNK/external/artinis');
-addpath('$TRUNK/fileio');
-addpath('$TRUNK/forward');
-addpath('$TRUNK/inverse');
-addpath('$TRUNK/peer');
-addpath('$TRUNK/plotting');
-addpath('$TRUNK/preproc');
-addpath('$TRUNK/qsub');
-addpath('$TRUNK/realtime/example');
-addpath('$TRUNK/realtime/online_eeg');
-addpath('$TRUNK/realtime/online_meg');
-addpath('$TRUNK/realtime/online_mri');
-addpath('$TRUNK/specest');
-addpath('$TRUNK/statfun');
-addpath('$TRUNK/trialfun');
-addpath('$TRUNK/utilities');
+addpath('$FIELDTRIPDIR');
+addpath('$FIELDTRIPDIR/connectivity');
+addpath('$FIELDTRIPDIR/contrib/misc');
+addpath('$FIELDTRIPDIR/contrib/nutmegtrip');
+addpath('$FIELDTRIPDIR/contrib/spike');
+addpath('$FIELDTRIPDIR/engine');
+addpath('$FIELDTRIPDIR/external/artinis');
+addpath('$FIELDTRIPDIR/fileio');
+addpath('$FIELDTRIPDIR/forward');
+addpath('$FIELDTRIPDIR/inverse');
+addpath('$FIELDTRIPDIR/peer');
+addpath('$FIELDTRIPDIR/plotting');
+addpath('$FIELDTRIPDIR/preproc');
+addpath('$FIELDTRIPDIR/qsub');
+addpath('$FIELDTRIPDIR/realtime/example');
+addpath('$FIELDTRIPDIR/realtime/online_eeg');
+addpath('$FIELDTRIPDIR/realtime/online_meg');
+addpath('$FIELDTRIPDIR/realtime/online_mri');
+addpath('$FIELDTRIPDIR/specest');
+addpath('$FIELDTRIPDIR/statfun');
+addpath('$FIELDTRIPDIR/trialfun');
+addpath('$FIELDTRIPDIR/utilities');
 ft_defaults
 
 % create the reference documentation
-system('cd $TARGETDIR && git pull');
-% system('rm $TARGETDIR/reference/*.md');
-% ft_documentationreference('$TARGETDIR/reference');
-% system('cd $TARGETDIR && git add reference/*.md && git commit -m "updated reference documentation"');
-ft_documentationconfiguration('$TARGETDIR/configuration.md');
-system('cd $TARGETDIR && git add configuration.md && git commit -m "updated configuration index"');
-system('cd $TARGETDIR && git push');
+system('cd $WEBSITEDIR && git pull');
+% system('rm $WEBSITEDIR/reference/*.md');
+% ft_documentationreference('$WEBSITEDIR/reference');
+% system('cd $WEBSITEDIR && git add reference/*.md && git commit -m "updated reference documentation"');
+ft_documentationconfiguration('$WEBSITEDIR/configuration.md');
+system('cd $WEBSITEDIR && git add configuration.md && git commit -m "updated configuration index"');
+system('cd $WEBSITEDIR && git push');
 
 end % try
 exit
