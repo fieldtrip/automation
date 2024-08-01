@@ -7,6 +7,8 @@
 # http://www.fieldtriptoolbox.org/reference/
 # http://www.fieldtriptoolbox.org/reference/configuration
 
+echo Executing $0
+
 # specify working directories
 PROJECTDIR=/project/3011231.02/
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip

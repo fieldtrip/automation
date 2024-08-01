@@ -10,6 +10,8 @@
 # for a specific revision.
 #
 
+echo Executing $0
+
 # make it robust for running as a cron job
 AWK=/usr/bin/awk
 GIT=/usr/bin/git

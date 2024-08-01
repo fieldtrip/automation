@@ -7,6 +7,8 @@
 #   schedule-batch.sh <FIELDTRIPDIR> <LOGDIR>
 #   schedule-batch.sh <FIELDTRIPDIR>
 
+echo Executing $0
+
 # specify working directories
 PROJECTDIR=/project/3011231.02/
 DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard

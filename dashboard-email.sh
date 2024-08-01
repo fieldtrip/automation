@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo Executing $0
+
 # make it robust for running as a cron job
 GREP=/usr/bin/grep
 AWK=/usr/bin/awk

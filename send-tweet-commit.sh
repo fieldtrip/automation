@@ -7,6 +7,8 @@
 #   - https://stedolan.github.io/jq/
 #   - https://github.com/jgorset/git.io
 
+echo Executing $0
+
 URL=`jq .head_commit.url $HOME/.webhook/fieldtrip/payload`
 URL=${URL:1:-1}
 SHORTURL=`git.io $URL`

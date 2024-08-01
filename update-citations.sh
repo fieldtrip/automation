@@ -6,6 +6,8 @@
 # this script is started either from a cronjob or a webhook and it updates
 # http://www.fieldtriptoolbox.org/citation/
 
+echo Executing $0
+
 # specify working directories
 PROJECTDIR=/project/3011231.02/
 LOCKFILE=$PROJECTDIR/fieldtrip/citations.lock

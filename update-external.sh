@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo Executing $0
+
 # specify working directories
 PROJECTDIR=/project/3011231.02/
 EXTERNALDIR=$PROJECTDIR/fieldtrip/external

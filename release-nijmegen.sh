@@ -3,6 +3,8 @@
 #PBS -l walltime=00:05:00
 #PBS -l mem=100Mb
 
+echo Executing $0
+
 # make it robust for running as a cron job
 AWK=/usr/bin/awk
 GIT=/usr/bin/git
