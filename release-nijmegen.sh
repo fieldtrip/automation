@@ -18,7 +18,7 @@ ZIP=/usr/bin/zip
 PROJECTDIR=/project/3011231.02/
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 RELEASEDIR=$PROJECTDIR/fieldtrip/release
-SHAREDDIR=/home/common/matlab/fieldtrip
+NIJMEGENDIR=/home/common/matlab/fieldtrip
 
 cd $FIELDTRIPDIR && $GIT checkout release && $GIT pull upstream release
 
@@ -28,5 +28,5 @@ $RSYNC -ar --copy-links --delete --exclude .git $FIELDTRIPDIR/ $RELEASEDIR/relea
 # find . -type d -exec chmod 755 {} \;
 
 # update the version on the shared directory
-$RSYNC -ar --delete --exclude data $RELEASEDIR/release-nijmegen/ $SHAREDDIR || exit 1
+$RSYNC -ar --delete --exclude data $RELEASEDIR/release-nijmegen/ $NIJMEGENDIR || exit 1
 

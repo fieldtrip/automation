@@ -10,7 +10,8 @@ CHMOD=/usr/bin/chmod
 
 # specify working directories
 PROJECTDIR=/project/3011231.02/
-LOGDIR=$PROJECTDIR/fieldtrip/dashboard/logs
+DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
+LOGDIR=$DASHBOARDDIR/logs
 
 # allow other team members to read the log files
 $CHMOD 644 $LOGDIR/latest/*
