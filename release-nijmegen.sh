@@ -15,7 +15,7 @@ RSYNC=/opt/cluster/external/utilities/bin64/rsync
 ZIP=/usr/bin/zip
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 RELEASEDIR=$PROJECTDIR/fieldtrip/release
 NIJMEGENDIR=/home/common/matlab/fieldtrip

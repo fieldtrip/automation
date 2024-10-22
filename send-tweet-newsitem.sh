@@ -30,7 +30,7 @@ TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot
 NODE=$HOME/.nvm/versions/node/v16.18.1/bin/node
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 WEBSITEDIR=$PROJECTDIR/fieldtrip/website
 HASHFILE=$PROJECTDIR/fieldtrip/.tweethash
 

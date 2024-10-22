@@ -23,7 +23,7 @@ TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 WEBSITEDIR=$PROJECTDIR/fieldtrip/website
 

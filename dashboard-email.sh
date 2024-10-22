@@ -9,7 +9,7 @@ LS=/usr/bin/ls
 CHMOD=/usr/bin/chmod
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
 LOGDIR=$DASHBOARDDIR/logs
 

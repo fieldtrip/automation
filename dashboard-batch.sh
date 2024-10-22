@@ -10,7 +10,7 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 

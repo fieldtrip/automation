@@ -17,7 +17,7 @@ CURL=/usr/bin/curl
 SCP=/usr/bin/scp
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 RELEASEDIR=$PROJECTDIR/fieldtrip/release
 FTPDIR=/home/common/matlab/fieldtrip/data/ftp

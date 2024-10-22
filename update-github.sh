@@ -3,7 +3,7 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
 FILEIODIR=$PROJECTDIR/fieldtrip/fileio
 QSUBDIR=$PROJECTDIR/fieldtrip/qsub

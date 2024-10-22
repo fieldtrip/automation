@@ -9,7 +9,7 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/project/3011231.02/
+PROJECTDIR=/home/megmethods/roboos
 LOCKFILE=$PROJECTDIR/fieldtrip/citations.lock
 LOGFILE=$PROJECTDIR/fieldtrip/citations.log
 WEBSITEDIR=$PROJECTDIR/fieldtrip/website
