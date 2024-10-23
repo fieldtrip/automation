@@ -32,7 +32,7 @@ NODE=$HOME/.nvm/versions/node/v16.18.1/bin/node
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos
 WEBSITEDIR=$PROJECTDIR/fieldtrip/website
-HASHFILE=$PROJECTDIR/fieldtrip/.tweethash
+HASHFILE=$PROJECTDIR/fieldtrip/tweet.log
 
 touch $HASHFILE
 
