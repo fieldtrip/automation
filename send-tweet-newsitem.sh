@@ -1,9 +1,10 @@
 #!/bin/bash
 #
-# Send an update to twitter for all (new) posts with news items.
+# Send a social media update for new news items posts
 #
 # This makes use of 
 #   - https://github.com/sferik/t
+#   - https://github.com/mattn/bsky
 
 echo Executing $0
 
@@ -23,11 +24,9 @@ SORT=/usr/bin/sort
 TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
 
-T=$HOME/.rvm/gems/ruby-2.5.3/bin/t
-
-TOOTCONFIG=/home/megmethods/roboos/.mastodon.json
+TWEET=$HOME/.rvm/gems/ruby-2.5.3/bin/t
 TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot
-NODE=$HOME/.nvm/versions/node/v16.18.1/bin/node
+BSKY=$HOME/.gvm/pkgsets/go1.23.3/global/bin/bsky
 
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos
@@ -50,12 +49,13 @@ if [ ! -z "$MESSAGE" ] ; then
 HASH=`echo "$MESSAGE" | md5sum | cut -f 1 -d " "`
 
 if ! $( grep -q $HASH $HASHFILE ) ; then
-  echo sending tweet and toot: "$MESSAGE"
-  $T update "$MESSAGE"
-  echo "$MESSAGE" | $NODE $TOOT --config "$TOOTCONFIG"
   echo $HASH >> $HASHFILE
+  echo posting: "$MESSAGE"
+  ### $TWEET update "$MESSAGE"
+  $TOOT "$MESSAGE"
+  $BSKY post "$MESSAGE"
 else
-  echo not sending tweet or toot: "$MESSAGE"
+  echo not posting: "$MESSAGE"
 fi
 
 fi   # the message is not empty
