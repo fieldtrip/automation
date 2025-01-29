@@ -11,10 +11,10 @@ GIT=/usr/bin/git
 GREP=/usr/bin/grep
 LS=/usr/bin/ls
 MAIL=/usr/bin/mail
-RSYNC=/opt/cluster/external/utilities/bin64/rsync
 ZIP=/usr/bin/zip
 CURL=/usr/bin/curl
 SCP=/usr/bin/scp
+RSYNC=/usr/bin/rsync
 
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos

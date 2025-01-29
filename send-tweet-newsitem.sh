@@ -19,10 +19,10 @@ HUB=$HOME/.conda/envs/hub/bin/hub
 LS=/usr/bin/ls
 MAIL=/usr/bin/mail
 MKTEMP=/usr/bin/mktemp
-RSYNC=/opt/cluster/external/utilities/bin64/rsync
 SORT=/usr/bin/sort
 TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
+RSYNC=/usr/bin/rsync
 
 TWEET=$HOME/.rvm/gems/ruby-2.5.3/bin/t
 TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot

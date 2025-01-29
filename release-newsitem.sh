@@ -17,10 +17,10 @@ HUB=$HOME/.conda/envs/hub/bin/hub
 LS=/usr/bin/ls
 MAIL=/usr/bin/mail
 MKTEMP=/usr/bin/mktemp
-RSYNC=/opt/cluster/external/utilities/bin64/rsync
 SORT=/usr/bin/sort
 TAIL=/usr/bin/tail
 ZIP=/usr/bin/zip
+RSYNC=/usr/bin/rsync
 
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos

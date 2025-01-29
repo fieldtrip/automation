@@ -18,7 +18,7 @@ GIT=/usr/bin/git
 GREP=/usr/bin/grep
 LS=/usr/bin/ls
 MAIL=/usr/bin/mail
-RSYNC=/opt/cluster/external/utilities/bin64/rsync
+RSYNC=/usr/bin/rsync
 
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos

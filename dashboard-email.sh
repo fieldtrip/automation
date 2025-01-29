@@ -7,6 +7,7 @@ GREP=/usr/bin/grep
 AWK=/usr/bin/awk
 LS=/usr/bin/ls
 CHMOD=/usr/bin/chmod
+RSYNC=/usr/bin/rsync
 
 # specify working directories
 PROJECTDIR=/home/megmethods/roboos
