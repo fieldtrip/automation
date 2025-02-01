@@ -40,6 +40,9 @@ BRANCH=$(cat $LOGDIR/branch)
 FAILED=$($GREP FAILED $LOGDIR/*.txt | wc -l)
 PASSED=$($GREP PASSED $LOGDIR/*.txt | wc -l)
 
+echo $FAILED of the tests failed
+echo $PASSED of the tests passed
+
 if [ "$BRANCH" == "master" ]; then
 if [ $FAILED -eq 0 ]; then
 if [ $PASSED -gt 600 ]; then
