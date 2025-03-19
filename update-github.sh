@@ -3,12 +3,12 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
-FILEIODIR=$PROJECTDIR/fieldtrip/fileio
-QSUBDIR=$PROJECTDIR/fieldtrip/qsub
+PROJECTDIR=/project/3031000.02
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
+FILEIODIR=$PROJECTDIR/fileio
+QSUBDIR=$PROJECTDIR/qsub
 
-LOGFILE=$PROJECTDIR/fieldtrip/github.log
+LOGFILE=$PROJECTDIR/github.log
 
 # get all changes from the master branch on github
 cd $FIELDTRIPDIR || exit

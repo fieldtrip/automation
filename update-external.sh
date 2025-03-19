@@ -3,11 +3,11 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-EXTERNALDIR=$PROJECTDIR/fieldtrip/external
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+PROJECTDIR=/project/3031000.02
+EXTERNALDIR=$PROJECTDIR/external
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
 
-LOGFILE=$PROJECTDIR/fieldtrip/external.log
+LOGFILE=$PROJECTDIR/external.log
 
 cd $FIELDTRIPDIR && git checkout master && git pull upstream master
 

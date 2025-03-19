@@ -23,9 +23,9 @@ ZIP=/usr/bin/zip
 RSYNC=/usr/bin/rsync
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
-WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+PROJECTDIR=/project/3031000.02
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
+WEBSITEDIR=$PROJECTDIR/website
 
 ##############################################################################
 

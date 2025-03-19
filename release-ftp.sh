@@ -17,10 +17,10 @@ SCP=/usr/bin/scp
 RSYNC=/usr/bin/rsync
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
-RELEASEDIR=$PROJECTDIR/fieldtrip/release
-FTPDIR=/home/common/matlab/fieldtrip/data/ftp
+PROJECTDIR=/project/3031000.02
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
+RELEASEDIR=$PROJECTDIR/release
+FTPDIR=$PROJECTDIR/external/download
 
 cd $FIELDTRIPDIR && git checkout release && git pull upstream release
 
@@ -35,6 +35,7 @@ $RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/qsu
 $RSYNC -ar --copy-links --delete --exclude .git --exclude test $FIELDTRIPDIR/realtime/src/buffer/ $RELEASEDIR/release-buffer || exit 1
 
 LASTREVISION=$(cat revision)
+echo Last revision is $LASTREVISION
 if [[ "x$REVISION" = "x$LASTREVISION" ]]
 then
   echo the current release has not been updated compared to the previous

@@ -10,8 +10,8 @@ CHMOD=/usr/bin/chmod
 RSYNC=/usr/bin/rsync
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
+PROJECTDIR=/project/3031000.02
+DASHBOARDDIR=$PROJECTDIR/dashboard
 LOGDIR=$DASHBOARDDIR/logs
 
 # allow other team members to read the log files

@@ -29,9 +29,9 @@ TOOT=$HOME/.nvm/versions/node/v16.18.1/bin/toot
 BSKY=$HOME/.gvm/pkgsets/go1.23.3/global/bin/bsky
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-WEBSITEDIR=$PROJECTDIR/fieldtrip/website
-HASHFILE=$PROJECTDIR/fieldtrip/tweet.log
+PROJECTDIR=/project/3031000.02
+WEBSITEDIR=$PROJECTDIR/website
+HASHFILE=$PROJECTDIR/tweet.log
 
 touch $HASHFILE
 
@@ -50,12 +50,12 @@ HASH=`echo "$MESSAGE" | md5sum | cut -f 1 -d " "`
 
 if ! $( grep -q $HASH $HASHFILE ) ; then
   echo $HASH >> $HASHFILE
-  echo posting: "$MESSAGE"
+  echo posting $HASH: "$MESSAGE"
   ### $TWEET update "$MESSAGE"
   $TOOT "$MESSAGE"
   $BSKY post "$MESSAGE"
 else
-  echo not posting: "$MESSAGE"
+  echo not posting $HASH: "$MESSAGE"
 fi
 
 fi   # the message is not empty

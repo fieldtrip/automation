@@ -21,9 +21,9 @@ MAIL=/usr/bin/mail
 RSYNC=/usr/bin/rsync
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-DASHBOARDDIR=$PROJECTDIR/fieldtrip/dashboard
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
+PROJECTDIR=/project/3031000.02
+DASHBOARDDIR=$PROJECTDIR/dashboard
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
 
 REVISION=$1
 

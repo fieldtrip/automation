@@ -15,9 +15,9 @@ RSYNC=/usr/bin/rsync
 ZIP=/usr/bin/zip
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
-RELEASEDIR=$PROJECTDIR/fieldtrip/release
+PROJECTDIR=/project/3031000.02
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
+RELEASEDIR=$PROJECTDIR/release
 NIJMEGENDIR=/home/common/matlab/fieldtrip
 
 cd $FIELDTRIPDIR && $GIT checkout release && $GIT pull upstream release

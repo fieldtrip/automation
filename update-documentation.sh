@@ -10,16 +10,24 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-FIELDTRIPDIR=$PROJECTDIR/fieldtrip/fieldtrip
-WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+PROJECTDIR=/project/3031000.02
+FIELDTRIPDIR=$PROJECTDIR/fieldtrip
+WEBSITEDIR=$PROJECTDIR/website
 
-LOCKFILE=$PROJECTDIR/fieldtrip/documentation.lock
-LOGFILE=$PROJECTDIR/fieldtrip/documentation.log
+LOCKFILE=$PROJECTDIR/documentation.lock
+LOGFILE=$PROJECTDIR/documentation.log
 
-# prevent concurrent builds
+if [ "$(uname)" == "Darwin" ]; then
+  STAT=$(which gstat)
+  DATE=$(which gdate)
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  STAT=$(which stat)
+  DATE=$(which date)
+fi
+
+# prevent concurrent execution
 while [[ -e $LOCKFILE ]] ; do
-  LOCKTIME=$(( $(date +"%s") - $(stat -c "%Y" $LOCKFILE) ))
+  LOCKTIME=$(( $($DATE +"%s") - $($STAT -c "%Y" $LOCKFILE) ))
   if [ "$LOCKTIME" -gt "300" ]; then
     echo removing stale lock
     rm $LOCKFILE

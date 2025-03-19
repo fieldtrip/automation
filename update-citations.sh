@@ -9,11 +9,12 @@
 echo Executing $0
 
 # specify working directories
-PROJECTDIR=/home/megmethods/roboos
-LOCKFILE=$PROJECTDIR/fieldtrip/citations.lock
-LOGFILE=$PROJECTDIR/fieldtrip/citations.log
-WEBSITEDIR=$PROJECTDIR/fieldtrip/website
+PROJECTDIR=/project/3031000.02
+WEBSITEDIR=$PROJECTDIR/website
 SCRIPTDIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+
+LOCKFILE=$PROJECTDIR/citations.lock
+LOGFILE=$PROJECTDIR/citations.log
 
 if [ "$(uname)" == "Darwin" ]; then
   STAT=$(which gstat)
