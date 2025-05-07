@@ -8,6 +8,9 @@
 
 echo Executing $0
 
+# this is needed for the toot client
+source $HOME/.profile-nvm
+
 # make it robust for running as a cron job
 AWK=/usr/bin/awk
 CAT=/usr/bin/cat
@@ -54,8 +57,6 @@ if ! $( grep -q $HASH $HASHFILE ) ; then
   ### $TWEET update "$MESSAGE"
   $TOOT "$MESSAGE"
   $BSKY post "$MESSAGE"
-else
-  echo not posting $HASH: "$MESSAGE"
 fi
 
 fi   # the message is not empty
