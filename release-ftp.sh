@@ -74,12 +74,5 @@ else
   # tag it, this autmatically results in a release on github
   cd $FIELDTRIPDIR && git tag $TODAY && git push upstream --tags
 
-  # push it to the EEGLAB server
-  $SCP $RELEASEDIR/daily/fileio-$TODAY.zip         fieldtrip@sccn.ucsd.edu:upload
-  $SCP $RELEASEDIR/daily/fieldtrip-lite-$TODAY.zip fieldtrip@sccn.ucsd.edu:upload
-
-  # notify Arno that new plugin versions are available for inclusion in EEGLAB
-  $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fileio-$TODAY.zip&version=$TODAY&name=Fileio"
-  $CURL "https://sccn.ucsd.edu/eeglab/plugin_uploader/update_donders.php?file=fieldtrip-lite-$TODAY.zip&version=$TODAY&name=Fieldtrip-lite"
 fi
 
